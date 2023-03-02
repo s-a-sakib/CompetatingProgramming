@@ -43,35 +43,40 @@ using namespace std;
 int dx[]={0, 0, 1, -1, 1, 1, -1, -1};
 int dy[]={1, -1, 0, 0, 1, -1, 1, -1};
 
+/*
+        B. Count the Number of Pairs
+    Codeforces Round 844 (Rated for Div. 4)
 
+*/
+
+string x = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 void solve(){
-    string a , b , s = "";
-    cin >> a >> b;
+    int n , k , sum = 0 , extra = 0;
+    string s;
+    cin >> n >> k >> s;
 
-    if(size(a) > size(b)) swap(a,b);
+    map < char , int > m;
 
-    int shaheen = 0;
-    for(int i = 0 ; i < size(a) ; i++){
-        int flag = 0;
-        for(int j = shaheen ; j < size(b) ; j++){
-            if(a[i] == b[j] and j == shaheen){
-                shaheen++;
-                flag = 1;
-            }else if(a[i] == b[j] and j != shaheen){
-                shaheen = j + 1;
-                flag = 2;
+    for(int i = 0 ; i < s.size() ; i++){
+        m[s[i]] += 1;
+    }
+
+    for(int i = 0 ; i < 26 ; i++){
+        sum = sum + min ( m[x[i]] , m[x[i] + 32]);
+
+        if(m[x[i]] != m[x[i] + 32] and k != 0){
+            int fukur = (abs( m[x[i]] - m[x[i] + 32]) / 2);
+            if(fukur <= k){
+                extra = extra + fukur;
+                k = k - fukur;
+            }else{
+                extra = extra + k;
+                k = k - k;
             }
         }
-        if(flag == 0) 
-            s = s + "*";
-        else if(flag == 1) 
-            s = s + a[i];
-        else if (flag == 2)
-            s = s + "*" + a[i];
     }
-    cout << s << endl;
-    
+    cout << sum + extra << endl;
 }
         
 int32_t main(){
@@ -82,7 +87,7 @@ int32_t main(){
     cin >> t;
 
     while(t--){
-        solve();
+        solve();cl
     }
     return 0;
 }

@@ -12,12 +12,6 @@ using namespace std;
 
 int32_t main(){
     
-    for(int i = 0 ; i < 15 ; i++){
-        for(int j = 0 ; j < 5 ; j++){
-            if(j == 2) break;
-
-            cout << i << "  " << j << endl;
-        }
-    }
+    cout << (int)('B' - 'b') << endl;
     return 0;
 }
