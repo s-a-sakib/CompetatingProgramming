@@ -29,7 +29,7 @@
 
 #include<iostream> 
 #include<bits/stdc++.h>
-//#define int long long int
+#define int long long int
 #define yes cout << "YES" << endl
 #define no cout << "NO" << endl
 #define pb push_back
@@ -44,39 +44,29 @@ int dx[]={0, 0, 1, -1, 1, 1, -1, -1};
 int dy[]={1, -1, 0, 0, 1, -1, 1, -1};
 
 /*
-        B. Count the Number of Pairs
-    Codeforces Round 844 (Rated for Div. 4)
+        C1. Powering the Hero (easy version)
+    Codeforces Round 855 (Rated for Div. 4)
 
 */
 
-string x = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
 void solve(){
-    int n , k , sum = 0 , extra = 0;
-    string s;
-    cin >> n >> k >> s;
+    int n , a , sum = 0;
+    cin >> n;
+    multiset < int > m;
 
-    map < char , int > m;
-
-    for(int i = 0 ; i < s.size() ; i++){
-        m[s[i]] += 1;
-    }
-
-    for(int i = 0 ; i < 26 ; i++){
-        sum = sum + min ( m[x[i]] , m[x[i] + 32]);
-
-        if(m[x[i]] != m[x[i] + 32] and k != 0){
-            int fukur = (abs( m[x[i]] - m[x[i] + 32]) / 2);
-            if(fukur <= k){
-                extra = extra + fukur;
-                k = k - fukur;
-            }else{
-                extra = extra + k;
-                k = k - k;
-            }
+    for(int i = 1 ; i <= n ; i++){
+        cin >> a;
+        if(a != 0){
+            m.insert(a);
+        }else if(a == 0 and m.size() != 0){ 
+            auto x = std::prev(m.end());
+            auto last = *(m.rbegin());
+            sum = sum + last;
+            m.erase(x);
         }
     }
-    cout << sum + extra << endl;
+
+    cout << sum << endl;
 }
         
 int32_t main(){
@@ -87,7 +77,7 @@ int32_t main(){
     cin >> t;
 
     while(t--){
-        solve();cl
+        solve();
     }
     return 0;
 }
